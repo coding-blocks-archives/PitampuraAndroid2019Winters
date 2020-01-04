@@ -137,8 +137,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         for(i in baord){
             for(button in i){
-                button.text = ""
-                button.isEnabled = true
+                button.apply {
+                    text = ""
+                    isEnabled = true
+                }
             }
         }
     }
