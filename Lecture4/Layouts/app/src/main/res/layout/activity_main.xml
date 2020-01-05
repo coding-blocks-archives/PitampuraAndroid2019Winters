@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout android:layout_height="match_parent"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
+    android:id="@+id/root"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
@@ -42,5 +43,5 @@
         android:text="Hello ljdna!lkanaslkdnsalkdnlkdnaslkdnasldnaslkdnaslkdnsalkdnslkdnskldnaskdnlsandksnalkdnalkdnas ldsadlkasndlkasndoausbdjbibsalkdkjb" />
 
 
-</RelativeLayout>
+</LinearLayout>
 

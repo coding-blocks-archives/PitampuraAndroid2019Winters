@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
         val ll = LinearLayout(this)
-        setContentView(ll)
+        root.addView(ll)
         ll.orientation = LinearLayout.VERTICAL
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             ll.setBackgroundColor(resources.getColor(R.color.colorAccent))
