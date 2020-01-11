@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        for (i in 0..150) {
+        for (i in 0..100050) {
             val random = Random().nextInt(5)
             val movie = Movie(
                     movies[random],
@@ -55,7 +55,7 @@ data class Movie(
 
 class MovieAdapter(val movies: ArrayList<Movie>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
+        val view :View = convertView ?:LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         view.text1.text = movies[position].name + "( " + movies[position].year + " )"
         view.textView2.text = movies[position].year
         view.imageView.setImageResource(movies[position].image)
