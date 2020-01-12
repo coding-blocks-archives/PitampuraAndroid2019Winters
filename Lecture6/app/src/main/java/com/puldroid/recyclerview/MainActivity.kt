@@ -2,6 +2,8 @@ package com.puldroid.recyclerview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +26,14 @@ class MainActivity : AppCompatActivity() {
         R.drawable.marvel,
         R.drawable.panther
     )
-    val list = arrayListOf<Movie>()
+    val list = arrayListOf<Movies>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         for (i in 0..100) {
             val random = Random().nextInt(5)
-            val movie = Movie(
+            val movie = Movies(
                 movies[random],
                 year[random],
                 actors[random],
@@ -39,12 +41,16 @@ class MainActivity : AppCompatActivity() {
             )
             list.add(movie)
         }
+        moviesRv.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = MovieAdapter(list)
+        }
     }
-
-    data class Movie(
-        val name: String,
-        val year: String,
-        val actor: String,
-        val image: Int
-    )
 }
+
+data class Movies(
+    val name: String,
+    val year: String,
+    val actor: String,
+    val image: Int
+)
