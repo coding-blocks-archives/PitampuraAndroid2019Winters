@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.item_movies.view.*
  */
 
 class MovieAdapter(val movies: ArrayList<Movies>) :
-    RecyclerView.Adapter<ItemVieHolder>() {
+    RecyclerView.Adapter<MovieAdapter.ItemVieHolder>() {
+    var onItemClickListener: MovieItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVieHolder {
         return ItemVieHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -26,16 +27,25 @@ class MovieAdapter(val movies: ArrayList<Movies>) :
 
     override fun onBindViewHolder(holder: ItemVieHolder, position: Int) {
         holder.bind(movies[position])
+
+    }
+
+    inner class ItemVieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(movie: Movies) {
+            itemView.apply {
+                text1.text = movie.name + "( " + movie.year + " )"
+                textView2.text = movie.year
+                imageView.setImageResource(movie.image)
+                setOnClickListener {
+                    onItemClickListener?.onItemClick(movie)
+                }
+            }
+
+        }
     }
 }
 
-class ItemVieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(movie: Movies) {
-        itemView.apply {
-            text1.text = movie.name + "( " + movie.year + " )"
-            textView2.text = movie.year
-            imageView.setImageResource(movie.image)
-        }
 
-    }
+interface MovieItemClickListener {
+    fun onItemClick(movie: Movies)
 }

@@ -1,8 +1,11 @@
 package com.puldroid.recyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -27,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         R.drawable.panther
     )
     val list = arrayListOf<Movies>()
+    private val onItemClicked = object :MovieItemClickListener{
+        override fun onItemClick(movie: Movies) {
+            Toast.makeText(this@MainActivity,"$movie",Toast.LENGTH_SHORT).show()
+      }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +50,12 @@ class MainActivity : AppCompatActivity() {
             )
             list.add(movie)
         }
+        val movieAdapter = MovieAdapter(list)
+        movieAdapter.onItemClickListener = onItemClicked
         moviesRv.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = MovieAdapter(list)
+            layoutManager = GridLayoutManager(this@MainActivity,3,RecyclerView.HORIZONTAL,false)
+            adapter = movieAdapter
+
         }
     }
 }
