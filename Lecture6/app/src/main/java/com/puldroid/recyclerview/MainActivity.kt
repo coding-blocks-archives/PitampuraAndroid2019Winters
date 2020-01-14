@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         R.drawable.marvel,
         R.drawable.panther
     )
-    val list = arrayListOf<Movies>()
+    val list = arrayListOf<String>()
     private val onItemClicked = object :MovieItemClickListener{
         override fun onItemClick(movie: Movies) {
             Toast.makeText(this@MainActivity,"$movie",Toast.LENGTH_SHORT).show()
@@ -40,21 +40,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        for (i in 0..100) {
-            val random = Random().nextInt(5)
-            val movie = Movies(
-                movies[random],
-                year[random],
-                actors[random],
-                images[random]
-            )
-            list.add(movie)
+//        for (i in 0..100) {
+//            val random = Random().nextInt(5)
+//            val movie = Movies(
+//                movies[random],
+//                year[random],
+//                actors[random],
+//                images[random]
+//            )
+//            list.add(movie)
+//        }
+//        val movieAdapter = MovieAdapter(list)
+//        movieAdapter.onItemClickListener = onItemClicked
+        val todoAdapter = TodoAdapter(list)
+        saveBtn.setOnClickListener {
+            val todo = input.editText?.text.toString()
+            list.add(todo)
+            todoAdapter.notifyDataSetChanged()
         }
-        val movieAdapter = MovieAdapter(list)
-        movieAdapter.onItemClickListener = onItemClicked
         moviesRv.apply {
             layoutManager = GridLayoutManager(this@MainActivity,3,RecyclerView.HORIZONTAL,false)
-            adapter = movieAdapter
+            adapter = todoAdapter
 
         }
     }
@@ -65,4 +71,6 @@ data class Movies(
     val year: String,
     val actor: String,
     val image: Int
-)
+):BaseModel()
+
+open class BaseModel()
