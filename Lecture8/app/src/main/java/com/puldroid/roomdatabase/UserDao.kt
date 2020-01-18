@@ -1,5 +1,6 @@
 package com.puldroid.roomdatabase
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -18,7 +19,7 @@ interface UserDao {
     fun insertAllUser(users: List<User>)
 
     @Query("Select * From User")
-    fun getAllUsers(): List<User>
+    fun getAllUsers(): LiveData<List<User>>
 
     @Query("Select * From User where age > :elder")
     fun getAllUser(elder:Int):List<User>
