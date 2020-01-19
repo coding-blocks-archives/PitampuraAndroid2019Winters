@@ -13,7 +13,7 @@ import androidx.room.Query
 interface UserDao {
 
     @Insert
-    fun insertUser(user: User)
+    suspend fun insertUser(user: User) :Long
 
     @Insert
     fun insertAllUser(users: List<User>)
