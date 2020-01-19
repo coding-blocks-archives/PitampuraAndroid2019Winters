@@ -1,5 +1,10 @@
 package com.puldroid.roomdatabase
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         )
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+    val nMgr by lazy {
+        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
     val name: MutableLiveData<String> = MutableLiveData()
@@ -51,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.Main) {
                val a =  withContext(Dispatchers.IO) { db.userDao().insertUser(User(editText.text.toString(), 15, "Student")) }
                 Toast.makeText(this@MainActivity,"Entry With id = $a",Toast.LENGTH_SHORT).show()
+                showNotification()
             }
         }
 
@@ -60,5 +70,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun showNotification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            nMgr.createNotificationChannel(
+                NotificationChannel(
+                    "first",
+                    "default",
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+            )
+        }
+        val notification = Notification.Builder(this,"first")
+            .setContentTitle("Header")
+            .setContentText("This is the Description")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .build()
+        nMgr.notify(System.currentTimeMillis().toInt(),notification)
     }
 }
