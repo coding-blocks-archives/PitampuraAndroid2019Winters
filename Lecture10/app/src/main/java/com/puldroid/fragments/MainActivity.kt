@@ -9,16 +9,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val bundle = Bundle()
         val fragment1 = BlankFragment()
-        bundle.putString("name", "DC")
-        fragment1.arguments = bundle
+        fragment1.arguments = Bundle().apply { putString("name", "DC") }
         val fragment2 = BlankFragment()
-        bundle.putString("name", "Marvel")
-        fragment2.arguments = bundle
+        fragment2.arguments = Bundle().apply { putString("name", "M") }
         val fragment = BlankFragment()
-        bundle.putString("name", "Marvel")
-        fragment.arguments = bundle
+        fragment.arguments = Bundle().apply { putString("name", "MARVEL") }
 
         val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
         pagerAdapter.apply {
