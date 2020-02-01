@@ -1,17 +1,17 @@
 package com.puldroid.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,13 +23,18 @@ class MainActivity : AppCompatActivity() {
         val request = Request.Builder()
                 .url("https://api.github.com/users/aggarwalpulkit596")
                 .build()
-        GlobalScope.launch(Dispatchers.IO) {
-            val result = okHttpClient.newCall(request).execute()
-            Log.i("Execute Function", result.toString())
-            if (result.isSuccessful) {
-                result.body?.let {
-                    val gson = Gson()
-                    val user = gson.fromJson<User>(it.string(),User::class.java)
+        val gson = Gson()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val user = withContext(Dispatchers.IO) {
+                val result = okHttpClient.newCall(request).execute()
+                gson.fromJson<User>(result.body?.string(), User::class.java)
+            }
+            textView.text = user.name
+            textView2.text = user.id.toString()
+            textView3.text = user.bio
+            Picasso.get().load(user.avatar_url).into(imageView)
+
 //                    val json = JSONObject(it.string())
 //                    val name = json.getString("name")
 //                    val id = json.getLong("id")
@@ -38,14 +43,10 @@ class MainActivity : AppCompatActivity() {
 //                    val bio:String = json.getString("bio")
 //                    val login = json.getString("login")
 //                    val user = USer(name,id,avatar_url,bio,login)
-                    Log.i("Execute Function", "$user")
-                } ?: run {
-                    Log.i("Execute Function", "error")
-                }
-            }
+            Log.i("Execute Function", "$user")
+        } ?: run {
+            Log.i("Execute Function", "error")
         }
-
-
     }
-
 }
+
