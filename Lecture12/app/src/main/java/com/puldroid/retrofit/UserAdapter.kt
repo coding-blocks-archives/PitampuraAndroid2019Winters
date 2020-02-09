@@ -13,7 +13,9 @@ import kotlinx.android.synthetic.main.item_user.view.*
  * @author aggarwalpulkit596
  */
 
-class UserAdapter(val list: List<User>) : RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter(val list: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+    var onItemClick:((user:User) -> Unit)? =null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         UserViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -29,21 +31,26 @@ class UserAdapter(val list: List<User>) : RecyclerView.Adapter<UserViewHolder>()
         holder.bind(list[position])
     }
 
-}
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(user: User) = with(itemView) {
+            userNameTv.text = user.name
+            follwersTv.text = user.login
+            userImage.shapeAppearanceModel = userImage.shapeAppearanceModel.toBuilder()
+                .setBottomRightCorner(CornerFamily.CUT, 100f)
+                .setBottomLeftCorner(CornerFamily.CUT, 100f)
 
-class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(user: User) = with(itemView) {
-        userNameTv.text = user.name
-        follwersTv.text = user.login
-        userImage.shapeAppearanceModel = userImage.shapeAppearanceModel.toBuilder()
-            .setBottomRightCorner(CornerFamily.CUT, 100f)
-            .setBottomLeftCorner(CornerFamily.CUT, 100f)
+                .setTopLeftCorner(CornerFamily.ROUNDED, 100f)
+                .setTopRightCorner(CornerFamily.ROUNDED, 100f)
 
-            .setTopLeftCorner(CornerFamily.ROUNDED, 100f)
-            .setTopRightCorner(CornerFamily.ROUNDED, 100f)
+                .build()
+            Picasso.get().load(user.avatarUrl).into(userImage)
+            setOnClickListener {
+                onItemClick?.invoke(user)
+            }
+        }
 
-            .build()
-        Picasso.get().load(user.avatarUrl).into(userImage)
     }
 
+
 }
+
