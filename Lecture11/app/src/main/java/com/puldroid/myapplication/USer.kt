@@ -25,7 +25,7 @@ data class User(
 	val url: String? = null,
 	val receivedEventsUrl: String? = null,
 	val followers: Int? = null,
-	val avatarUrl: String? = null,
+	val avatar_url: String? = null,
 	val eventsUrl: String? = null,
 	val htmlUrl: String? = null,
 	val following: Int? = null,
