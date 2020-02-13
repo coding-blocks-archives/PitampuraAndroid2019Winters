@@ -54,6 +54,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        fetchUser()
+    }
 
+    private fun fetchUser() {
+        User.userPosts()
+
+        User().friends
     }
 }
