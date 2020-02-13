@@ -2,6 +2,8 @@ package com.example.misc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -66,5 +68,18 @@ class MainActivity : AppCompatActivity() {
         User.userPosts()
 
         User().friends
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.like2Btn -> Toast.makeText(this,"Bookmarked",Toast.LENGTH_SHORT).show()
+            android.R.id.home -> Toast.makeText(this,"Back Pressed",Toast.LENGTH_SHORT).show()
+        }
+        return true
     }
 }
