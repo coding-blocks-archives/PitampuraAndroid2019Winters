@@ -19,17 +19,19 @@ class MainActivity : AppCompatActivity() {
 
         auth.createUserWithEmailAndPassword(email.text.toString(), pass.text.toString())
             .addOnCompleteListener {
-                val snack = Snackbar.make(root, "Account Created Succesfully", Snackbar.LENGTH_LONG)
-                snack.animationMode = Snackbar.ANIMATION_MODE_SLIDE
-                snack.show()
+                root.showSnack("Account Created Succesfully")
             }.addOnCanceledListener {
 
             }.addOnFailureListener {
-                val snack = Snackbar.make(root, "Error : ${it.localizedMessage}", Snackbar.LENGTH_LONG)
-                snack.animationMode = Snackbar.ANIMATION_MODE_SLIDE
-                snack.show()
+                root.showSnack("Error : ${it.localizedMessage}")
             }
 
 
     }
+}
+
+fun View.showSnack(msg: String) {
+    val snack = Snackbar.make(this, msg, Snackbar.LENGTH_LONG)
+    snack.animationMode = Snackbar.ANIMATION_MODE_SLIDE
+    snack.show()
 }
