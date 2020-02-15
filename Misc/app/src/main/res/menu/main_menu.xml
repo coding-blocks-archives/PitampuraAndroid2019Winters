@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/likeBtn"
+        android:title="Like"
+        android:icon="@drawable/ic_launcher_background"/>
+
+
+    <item android:id="@+id/like2Btn"
+        android:title="Bookmark"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+    <item android:id="@+id/like3Btn"
+        app:showAsAction="always"
+
+        android:title="Delete"
+        android:icon="@drawable/ic_launcher_background"/>
+
+    <item android:id="@+id/like4Btn"
+        app:showAsAction="always"
+
+        android:title="Delete"
+        android:icon="@drawable/ic_launcher_background"/>
+
+    <item android:id="@+id/like5Btn"
+        app:showAsAction="always"
+
+        android:title="Delete"
+        android:icon="@drawable/ic_launcher_background"/>
+
+</menu>
