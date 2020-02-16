@@ -39,9 +39,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupFacebookRegister()
+        startActivity(Intent(this,ChatActivity::class.java))
 
         authEvent.observe(this, Observer {
             if (it != null)
+            {
+            }
                 when (it) {
                     AUTH_EVENT_SUCCESS -> {
 
