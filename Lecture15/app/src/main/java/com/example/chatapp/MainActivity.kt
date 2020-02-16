@@ -41,7 +41,18 @@ class MainActivity : AppCompatActivity() {
         setupFacebookRegister()
 
         authEvent.observe(this, Observer {
+            if (it != null)
+                when (it) {
+                    AUTH_EVENT_SUCCESS -> {
 
+                    }
+                    AUTH_EVENT_EXISTS -> {
+
+                    }
+                    AUTH_EVENT_FAILURE ->{
+
+                    }
+                }
         })
 
     }
@@ -50,17 +61,17 @@ class MainActivity : AppCompatActivity() {
         mCallbackManager = CallbackManager.Factory.create()
         facebookLoginButton.setPermissions("email", "public_profile")
         facebookLoginButton
-                .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
-                    override fun onSuccess(loginResult: LoginResult) {
-                        registerFacebookUser(loginResult.accessToken)
-                    }
+            .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    registerFacebookUser(loginResult.accessToken)
+                }
 
-                    override fun onCancel() {
-                    }
+                override fun onCancel() {
+                }
 
-                    override fun onError(error: FacebookException) {
-                    }
-                })
+                override fun onError(error: FacebookException) {
+                }
+            })
     }
 
     private fun registerFacebookUser(token: AccessToken) {
@@ -75,8 +86,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 authEvent.postValue(AUTH_EVENT_FAILURE)
             }
-        }.addOnFailureListener {
-            e ->
+        }.addOnFailureListener { e ->
         }
     }
 
@@ -116,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getSignInOptions(): GoogleSignInOptions? {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
+            .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
 
     }
 
