@@ -1,6 +1,7 @@
 package com.codingblocks.mediaplayer
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 .penaltyDeath()
                 .build()
         )
+
+        btnMediaPlayer.setOnClickListener {
+            startActivity(Intent(this, MediaPlayerActivity::class.java))
+        }
 
 
         btnSave.setOnClickListener {

@@ -26,5 +26,10 @@
         android:id="@+id/btnRestore"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
+    <Button
+        android:text="Play Media"
+        android:id="@+id/btnMediaPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
