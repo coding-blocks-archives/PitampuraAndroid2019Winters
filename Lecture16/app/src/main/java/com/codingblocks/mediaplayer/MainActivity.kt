@@ -5,10 +5,15 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.os.StrictMode
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +25,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyDeath()
+                .build()
+        )
+
 
         btnSave.setOnClickListener {
 
@@ -70,23 +83,30 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "restoring file", Toast.LENGTH_SHORT)
             .show()
 
-        val dirs = getExternalFilesDirs(Environment.DIRECTORY_DOCUMENTS)
+        GlobalScope.launch {
+            val dirs = getExternalFilesDirs(Environment.DIRECTORY_DOCUMENTS)
 
-        dirs[dirs.lastIndex]?.let {
-            val file = File(it, "data.txt")
-            if (file.exists()) {
+            dirs[dirs.lastIndex]?.let {
+                val file = File(it, "data.txt")
+                if (file.exists()) {
 
-                val savedData = file.readText()
-                etData.setText(savedData)
+                    val savedData = file.readText()
+                    withContext(Dispatchers.Main) {
+                        etData.setText(savedData)
+                    }
 
-            } else {
-                Toast.makeText(
-                    this,
-                    "Data never saved yet",
-                    Toast.LENGTH_SHORT
-                ).show()
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Data never saved yet",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
             }
         }
+
 
     }
 
@@ -94,18 +114,20 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "writing file", Toast.LENGTH_SHORT)
             .show()
 
-        val data = etData.text.toString()
-        val dirs = getExternalFilesDirs(Environment.DIRECTORY_DOCUMENTS)
+        GlobalScope.launch {
+            val data = etData.text.toString()
+            val dirs = getExternalFilesDirs(Environment.DIRECTORY_DOCUMENTS)
 
-        for (dir in dirs) {
-            Log.d("FILEPATH", "writing to " + dir.absolutePath)
+            for (dir in dirs) {
+                Log.d("FILEPATH", "writing to " + dir.absolutePath)
 
-            dir?.let {
-                val file = File(dir, "data.txt")
-                file.writeBytes(data.toByteArray())
-                Log.d("FILEPATH", "written = " + (file.exists()).toString())
+                dir?.let {
+                    val file = File(dir, "data.txt")
+                    file.writeBytes(data.toByteArray())
+                    Log.d("FILEPATH", "written = " + (file.exists()).toString())
+                }
+
             }
-
         }
 
 
