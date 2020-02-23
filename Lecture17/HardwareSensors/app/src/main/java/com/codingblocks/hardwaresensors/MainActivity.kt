@@ -1,6 +1,7 @@
 package com.codingblocks.hardwaresensors
 
 import android.content.Context
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -8,12 +9,14 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var sensorEventListener: SensorEventListener
     lateinit var sm: SensorManager
     lateinit var proximitySensor: Sensor
+    lateinit var accelSensor: Sensor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,27 +34,36 @@ class MainActivity : AppCompatActivity() {
             )
         }
         proximitySensor = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        accelSensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
         sensorEventListener = object : SensorEventListener {
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
                 Log.d("SENSOR", "onAccuracyChanged")
             }
 
             override fun onSensorChanged(event: SensorEvent?) {
-                Log.d(
-                    "SENSOR", """onSensorChanged
-                    | ${event?.values?.get(0)}
-                """.trimMargin()
-                )
+                event?.values?.let {
+                    val bgColor = accelToColor(it[0], it[1], it[2])
+                    bgLayout.setBackgroundColor(bgColor)
+                }
             }
         }
 
+    }
+
+    private fun accelToColor(ax: Float, ay: Float, az: Float): Int {
+        val R = (((ax + 12) / 24) * 255).toInt()
+        val G = (((ay + 12) / 24) * 255).toInt()
+        val B = (((az + 12) / 24) * 255).toInt()
+
+        return Color.rgb(R, G, B)
     }
 
     override fun onResume() {
         super.onResume()
         sm.registerListener(
             sensorEventListener,
-            proximitySensor,
+            accelSensor,
             1000 * 1000
         )
     }
