@@ -1,5 +1,6 @@
 package com.puldroid.chatapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth.addAuthStateListener {
+            if(it.currentUser != null){
+                startActivity(Intent(this,ChatActivity::class.java))
+            }else{
+
+            }
+        }
     }
 
     private fun signUpWithEmail() {
@@ -25,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     root.showSnack("Error : ${it.localizedMessage}")
                 }
+
     }
 
     fun View.showSnack(msg: String) {
