@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "33840362646",
+    "firebase_url": "https://chatapp-c3754.firebaseio.com",
+    "project_id": "chatapp-c3754",
+    "storage_bucket": "chatapp-c3754.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33840362646:android:50a5671a76296ff940feb7",
+        "android_client_info": {
+          "package_name": "com.codingblocks.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33840362646-0k8av6kjhlhfui109o60q8kih0sgk3uq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codingblocks.chatapp",
+            "certificate_hash": "a5a4ae3a97252f9da9c3954c098bb02fb455551b"
+          }
+        },
+        {
+          "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl5ctFwLWx3ulbgHDnzYb0mgcbGS8u1p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33840362646:android:7a11b0e99b7ef6d740feb7",
+        "android_client_info": {
+          "package_name": "com.codingblocks.whatsappclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33840362646-lqobo2ott2kragjnnkjlbr8eokne47nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codingblocks.whatsappclone",
+            "certificate_hash": "a5a4ae3a97252f9da9c3954c098bb02fb455551b"
+          }
+        },
+        {
+          "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl5ctFwLWx3ulbgHDnzYb0mgcbGS8u1p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33840362646:android:87507520a4280b4c40feb7",
+        "android_client_info": {
+          "package_name": "com.puldroid.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33840362646-dkroa647845hb0tq3qsl1jm13ik5j146.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.puldroid.chatapp",
+            "certificate_hash": "045d03c53b977ce83094ddd639512ed015c8ffc0"
+          }
+        },
+        {
+          "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl5ctFwLWx3ulbgHDnzYb0mgcbGS8u1p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33840362646-61thp6b69ekglqp1dh8b8tjpqt6ha5p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
