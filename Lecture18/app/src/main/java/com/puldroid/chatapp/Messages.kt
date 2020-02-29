@@ -3,7 +3,8 @@ package com.puldroid.chatapp
 data class Messages(
     val from:String,
     val time:Long,
-    val msg:String
+    val msg:String,
+    val email:String
 ){
-    constructor():this("",0L,"")
+    constructor():this("",0L,"","")
 }

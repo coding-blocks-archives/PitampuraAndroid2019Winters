@@ -24,7 +24,28 @@ class ChatActivity : AppCompatActivity() {
                 Messages(
                     uid,
                     System.currentTimeMillis(),
-                    "Hello")
+                    "Hello",
+                    auth.currentUser?.email!!)
             )
     }
 }
+
+/*
+{
+  "rules": {
+    "messages": {
+      ".write" : "auth != null",
+    	".read" : "auth != null",
+			"$msg" : {
+        ".validate" : "newData.hasChildren(['email','from','time','msg'])",
+          "msg" :{
+            ".validate":"newData.isString()"
+          },
+           "time" :{
+            ".validate":"newData.isNumber()"
+          }
+      }
+    }
+}
+}
+ */
