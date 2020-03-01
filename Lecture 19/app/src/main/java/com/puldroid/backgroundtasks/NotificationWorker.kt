@@ -8,9 +8,9 @@ import android.os.Build
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
-class NotificationWorker(val context:Context,workerParameters: WorkerParameters):Worker(context,workerParameters) {
+class NotificationWorker(val context:Context,val workerParameters: WorkerParameters):Worker(context,workerParameters) {
     override fun doWork(): Result {
-        createNotification("this is title", "this is a description")
+        createNotification(workerParameters.inputData.getString("TITLE")?:"Default title", "this is a description")
         return Result.success()
     }
 
@@ -31,7 +31,9 @@ class NotificationWorker(val context:Context,workerParameters: WorkerParameters)
         val builder = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             Notification.Builder(context, "1")
         } else {
+            //Create Heads up for Devices API < Oreo
             Notification.Builder(context)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_LIGHTS or Notification.DEFAULT_VIBRATE)
 
         }
