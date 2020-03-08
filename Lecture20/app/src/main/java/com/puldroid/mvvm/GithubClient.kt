@@ -8,4 +8,6 @@ object GithubClient {
         .baseUrl("https://github-trending-api.now.sh/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    val api = retrofit.create(GithubAPI::class.java)
 }
