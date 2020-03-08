@@ -3,11 +3,9 @@ package com.puldroid.mvvm.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.puldroid.mvvm.data.api.GithubClient
 import com.puldroid.mvvm.data.models.Repositories
-import kotlinx.coroutines.Dispatchers
+import com.puldroid.mvvm.data.repos.MainRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
     init {
@@ -15,11 +13,24 @@ class MainViewModel : ViewModel() {
     }
 
     val repos = MutableLiveData<List<Repositories>>()
-    private fun fetchRepo() {
+    private fun fetchRepo(isPremium: Boolean = false) {
         viewModelScope.launch {
-            val res = withContext(Dispatchers.IO) { GithubClient.api.getRepos() }
+            val res = MainRepository.getRepos()
             if (res.isSuccessful) {
-                repos.postValue(res.body())
+                if (isPremium)
+                    repos.postValue(res.body()?.subList(0,10))
+                else{
+                    repos.postValue(res.body())
+                }
+            }
+        }
+    }
+
+    private fun fetchTop10Repo() {
+        viewModelScope.launch {
+            val res = MainRepository.getRepos()
+            if (res.isSuccessful) {
+                repos.postValue(res.body()?.subList(0, 10))
             }
         }
     }

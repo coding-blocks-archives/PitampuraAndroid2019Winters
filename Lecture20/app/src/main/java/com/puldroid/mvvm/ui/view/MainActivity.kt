@@ -35,18 +35,18 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable("RES",list[0])
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val item = savedInstanceState.getSerializable("RES") as Repositories
-        list.add(item)
-        adapter.swapData(list)
-
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putSerializable("RES",list[0])
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        val item = savedInstanceState.getSerializable("RES") as Repositories
+//        list.add(item)
+//        adapter.swapData(list)
+//
+//    }
 
 
 }
