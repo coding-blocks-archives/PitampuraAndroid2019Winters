@@ -1,4 +1,6 @@
-package com.puldroid.mvvm
+package com.puldroid.mvvm.data.models
+
+import java.io.Serializable
 
 data class Repositories(
 	val forks: Int? = null,
@@ -12,7 +14,7 @@ data class Repositories(
 	val stars: Int? = null,
 	val url: String? = null,
 	val currentPeriodStars: Int? = null
-)
+) : Serializable
 data class Author(
 	val href: String? = null,
 	val avatar: String? = null,

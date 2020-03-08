@@ -1,4 +1,4 @@
-package com.puldroid.mvvm
+package com.puldroid.mvvm.data.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,5 +9,6 @@ object GithubClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val api = retrofit.create(GithubAPI::class.java)
+    val api = retrofit.create(
+        GithubAPI::class.java)
 }

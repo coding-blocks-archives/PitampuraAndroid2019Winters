@@ -1,4 +1,4 @@
-package com.puldroid.mvvm
+package com.puldroid.mvvm.utils
 
 import android.content.Context
 import android.graphics.Color
